@@ -1,13 +1,16 @@
-#load packages
+# get the data 
+attendance <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2020/2020-02-04/attendance.csv')
+
+#download packages
 library(tidyverse)
 library(dplyr)
-#download the data
-passwords <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2020/2020-01-14/passwords.csv') 
-#clean data, omit empty rows
-password <- na.omit(passwords)
-#bar plot
-ggplot(data = password) +
-       geom_bar(mapping = aes(x = category, fill = category)) +
-       labs(title = "Popular Password Data") +
-       theme_light() +
-       coord_flip()
+
+#manipulate the data
+df.attendance <- filter(attendance, team=="Kansas City")
+
+#plot the data
+ggplot(data = df.attendance) +
+  +     geom_line(mapping = aes(x = year, y = total)) +
+  +     labs(title = "Kansas City Chiefs Total Attendance 2000-2020", x = "Year", y = "Total Attencance") +
+  +     theme_minimal()
+
